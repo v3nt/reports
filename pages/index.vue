@@ -3,7 +3,7 @@
     <h1>Cognitive Credit reports</h1>
     <div><input type="text" v-model="filterName" /></div>
 
-    <table>
+    <table v-if="reportsList && reportsList.length">
       <thead>
         <tr>
           <th
