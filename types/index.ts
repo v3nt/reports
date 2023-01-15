@@ -7,11 +7,12 @@ export interface ReportsDataItem {
 }
 
 export interface ReportsList {
-  reportsList: ReportsDataItem[];
+  reportsList: ReportsDataItem[] | null;
 }
 
 export interface TableHeaderItem {
   title: string;
+  id: string;
 }
 
-export interface TableHeaderList extends Array<TableHeaderItem>;
+export interface TableHeaderList extends Array<TableHeaderItem> {}

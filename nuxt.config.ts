@@ -2,7 +2,9 @@
 export default defineNuxtConfig({
   modules: ["@pinia/nuxt"],
   css: ["@/assets/styles/main.scss"],
-  // build: { transpile: ["@nuxtjs/style-resources"] },
+  imports: {
+    autoImport: false,
+  },
   vite: {
     css: {
       preprocessorOptions: {

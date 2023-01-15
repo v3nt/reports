@@ -3,12 +3,13 @@
     <h1>Cognitive Credit reports</h1>
     <div><input type="text" v-model="filterName" /></div>
 
-    <table v-if="reportsList && reportsList.length">
+    <table v-if="tableRows && tableRows.length">
       <thead>
         <tr>
           <th
-            v-for="(headerItem, i) in tableHeaders"
+            v-for="(headerItem, i) in tableHeaderColumns"
             :key="`table-header-col-${i}`"
+            @click="sortTableBy(headerItem.id, $event)"
           >
             {{ headerItem.title }}
           </th>
@@ -31,11 +32,21 @@
 import { storeToRefs } from "pinia";
 import { useReportsStore } from "~/store";
 import useTable from "~/composables/useTable";
-import { ref } from "#imports";
+import { ref } from "#build/imports";
+import { ReportsDataItem, ReportsList } from "~/types";
 const filterName = ref("");
-const { tableHeaders } = useTable();
+const headerColumns = [
+  { title: "Company Name", id: "companyName" },
+  { title: "Last report date", id: "lastReportingDate" },
+  { title: "Last report period", id: "lastReportingPeriod" },
+  { title: "Next report date", id: "nextReportingDate" },
+  { title: "Reporting inferred?", id: "nextReportingInferred" },
+];
 const reportsStore = useReportsStore();
 reportsStore.setReports();
-
 const { reportsList } = storeToRefs(reportsStore);
+const { sortTableBy, tableRows, tableHeaderColumns } = useTable(
+  reportsList as ReportsDataItem[] | any,
+  headerColumns
+);
 </script>
