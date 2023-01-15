@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ReportsList } from "~/types";
+import { ReportsDataItem, ReportsList } from "~/types";
 
 export const useReportsStore = defineStore("reports", {
   state: () => {
@@ -16,10 +16,18 @@ export const useReportsStore = defineStore("reports", {
     };
   },
   actions: {
-    async setReports() {
+    async setReports(filterNameInput: string) {
       const result = await fetch("http://localhost:3000/report-dates.json");
       const data = await result.json();
-      this.reportsList = data;
+      this.reportsList = filterNameInput
+        ? data
+            .filter((e: ReportsDataItem) =>
+              e.companyName.includes(filterNameInput.toLowerCase())
+            )
+            .map((e: ReportsDataItem) => {
+              return { ...e };
+            })
+        : data;
     },
   },
   getters: {

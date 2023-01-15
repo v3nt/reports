@@ -1,7 +1,13 @@
 <template>
   <div class="container">
     <h1>Cognitive Credit reports</h1>
-    <div><input type="text" v-model="filterName" /></div>
+    <div>
+      <input
+        type="text"
+        v-model="filterNameInput"
+        @input="filterByName(), test()"
+      />
+    </div>
 
     <table v-if="tableRows && tableRows.length">
       <thead>
@@ -33,9 +39,9 @@
 import { storeToRefs } from "pinia";
 import { useReportsStore } from "~/store";
 import useTable from "~/composables/useTable";
-import { ref } from "#build/imports";
 import { ReportsDataItem } from "~/types";
-const filterName = ref("");
+import { ref } from "@vue/reactivity";
+
 const headerColumns = [
   { title: "Company Name", id: "companyName", sort: "ASC" },
   { title: "Last report date", id: "lastReportingDate" },
@@ -44,10 +50,16 @@ const headerColumns = [
   { title: "Reporting inferred?", id: "nextReportingInferred" },
 ];
 const reportsStore = useReportsStore();
-reportsStore.setReports();
+const filterNameInput = ref("");
+
+reportsStore.setReports(filterNameInput.value);
 const { reportsList } = storeToRefs(reportsStore);
+let reportsListWhole = reportsList;
+const test = () => {
+  reportsStore.setReports(filterNameInput.value);
+};
 const { sortTableBy, tableRows, tableHeaderColumns } = useTable(
-  reportsList as ReportsDataItem[] | any,
+  reportsListWhole as ReportsDataItem[] | any,
   headerColumns
 );
 </script>
