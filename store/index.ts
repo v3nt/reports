@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
-import { ReportsDataItem, ReportsList } from "~/types";
-import { useFetch } from "#app";
+import { ReportsList } from "~/types";
 
 export const useReportsStore = defineStore("reports", {
   state: () => {

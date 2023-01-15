@@ -9,5 +9,3 @@ export interface ReportsDataItem {
 export interface ReportsList {
   reportsList: ReportsDataItem[];
 }
-
-// interface ReportsData extends Array<ReportsDataItem>{}
