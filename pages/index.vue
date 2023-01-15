@@ -9,19 +9,20 @@
           <th
             v-for="(headerItem, i) in tableHeaderColumns"
             :key="`table-header-col-${i}`"
-            @click="sortTableBy(headerItem.id, $event)"
+            @click="sortTableBy(headerItem.id, headerItem?.sort, i)"
           >
             {{ headerItem.title }}
+            {{ headerItem.sort }}
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="reportsList && reportsList.length">
         <tr v-for="(item, i) in reportsList" :key="`table-row-${i}`">
           <td>{{ item.companyName }}</td>
           <td>{{ item.lastReportingDate }}</td>
           <td>{{ item.lastReportingPeriod }}</td>
           <td>{{ item.nextReportingDate }}</td>
-          <td>{{ item.nextReportingInferred }}</td>
+          <td>{{ item?.nextReportingInferred }}</td>
         </tr>
       </tbody>
     </table>
@@ -33,10 +34,10 @@ import { storeToRefs } from "pinia";
 import { useReportsStore } from "~/store";
 import useTable from "~/composables/useTable";
 import { ref } from "#build/imports";
-import { ReportsDataItem, ReportsList } from "~/types";
+import { ReportsDataItem } from "~/types";
 const filterName = ref("");
 const headerColumns = [
-  { title: "Company Name", id: "companyName" },
+  { title: "Company Name", id: "companyName", sort: "ASC" },
   { title: "Last report date", id: "lastReportingDate" },
   { title: "Last report period", id: "lastReportingPeriod" },
   { title: "Next report date", id: "nextReportingDate" },

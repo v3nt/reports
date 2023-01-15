@@ -17,7 +17,7 @@ export const useReportsStore = defineStore("reports", {
   },
   actions: {
     async setReports() {
-      const result = await fetch("report-dates.json");
+      const result = await fetch("http://localhost:3000/report-dates.json");
       const data = await result.json();
       this.reportsList = data;
     },
