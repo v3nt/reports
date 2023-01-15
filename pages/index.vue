@@ -2,14 +2,16 @@
   <div class="container">
     <h1>Cognitive Credit reports</h1>
     <div><input type="text" v-model="filterName" /></div>
+
     <table>
       <thead>
         <tr>
-          <th>Company Name</th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th
+            v-for="(headerItem, i) in tableHeaders"
+            :key="`table-header-col-${i}`"
+          >
+            {{ headerItem.title }}
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +30,10 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useReportsStore } from "~/store";
+import useTable from "~/composables/useTable";
 import { ref } from "#imports";
 const filterName = ref("");
-
+const { tableHeaders } = useTable();
 const reportsStore = useReportsStore();
 reportsStore.setReports();
 

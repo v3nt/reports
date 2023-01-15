@@ -9,3 +9,9 @@ export interface ReportsDataItem {
 export interface ReportsList {
   reportsList: ReportsDataItem[];
 }
+
+export interface TableHeaderItem {
+  title: string;
+}
+
+export interface TableHeaderList extends Array<TableHeaderItem>;
