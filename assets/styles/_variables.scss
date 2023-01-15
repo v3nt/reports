@@ -1,0 +1,14 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+//
+// global-classes.scss
+%text-section {
+  // Changed dot to percentage
+  font-size: 16px;
+  letter-spacing: 3px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+$primary: $gray-900;
+$link-color: $primary;

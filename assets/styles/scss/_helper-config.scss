@@ -1,0 +1,15 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+// our vars
+@import "assets/styles/variables";
+//// bootstrap
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
+
+%p-1 {
+  @extend .p-1;
+}

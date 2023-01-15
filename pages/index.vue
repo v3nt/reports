@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Cognitive Credit reports</h1>
     <div><input type="text" v-model="filterName" /></div>
     <table>
