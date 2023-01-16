@@ -19,6 +19,7 @@ export const useReportsStore = defineStore("reports", {
     async setReports(filterNameInput: string) {
       const result = await fetch("http://localhost:3000/report-dates.json");
       const data = await result.json();
+      // filtering whole data but could search server with filterNameInput value
       this.reportsList = filterNameInput
         ? data
             .filter((e: ReportsDataItem) =>
