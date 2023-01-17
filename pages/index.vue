@@ -1,11 +1,17 @@
 <template>
-  <div class="container">
+  <div class="container pt-4">
     <h1>Cognitive Credit reports</h1>
-    <div>
+    <div class="my-4 col">
+      <label for="filter-table-string" class="col-2 fw-bold"
+        >Filter table</label
+      >
       <input
+        id="filter-table-string"
         type="text"
+        placeholder="..."
         v-model="filterNameInput"
         @input="filterByName(), test()"
+        class="col-9"
       />
     </div>
 
@@ -16,6 +22,7 @@
             v-for="(headerItem, i) in tableHeaderColumns"
             :key="`table-header-col-${i}`"
             @click="sortTableBy(headerItem.id, headerItem?.sort, i)"
+            class="pe-4"
           >
             {{ headerItem.title }}
             {{ headerItem.sort }}
@@ -24,11 +31,11 @@
       </thead>
       <tbody v-if="reportsList && reportsList.length">
         <tr v-for="(item, i) in reportsList" :key="`table-row-${i}`">
-          <td>{{ item.companyName }}</td>
-          <td>{{ item.lastReportingDate }}</td>
-          <td>{{ item.lastReportingPeriod }}</td>
-          <td>{{ item.nextReportingDate }}</td>
-          <td>{{ item?.nextReportingInferred }}</td>
+          <td class="pe-3">{{ item.companyName }}</td>
+          <td class="pe-3">{{ item.lastReportingDate }}</td>
+          <td class="pe-3">{{ item.lastReportingPeriod }}</td>
+          <td class="pe-3">{{ item.nextReportingDate }}</td>
+          <td class="pe-3">{{ item?.nextReportingInferred }}</td>
         </tr>
       </tbody>
     </table>

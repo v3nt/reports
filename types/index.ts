@@ -4,6 +4,9 @@ export interface ReportsDataItem {
   lastReportingPeriod: string;
   nextReportingDate: string;
   nextReportingInferred?: boolean;
+  lastReportingDateUnix: string;
+  lastReportingPeriodUnix: string;
+  nextReportingDateUnix: string;
 }
 
 export interface ReportsList {
