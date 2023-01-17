@@ -10,6 +10,7 @@ const useTable = (rows: ReportsDataItem[], headerColumns: TableHeaderList) => {
   const sortSetting = (colId: string, sortOrder: string, i: number) => {
     tableHeaderColumns.value[setSortIndex.value]["sort"] = "";
     setSortIndex.value = i;
+
     if (setSortIndex.value > 0 && sortOrder === "DESC") {
       return (tableHeaderColumns.value[0]["sort"] = "ASC");
       setSortIndex.value = 0;
@@ -31,8 +32,8 @@ const useTable = (rows: ReportsDataItem[], headerColumns: TableHeaderList) => {
   const sortTableBy = (colId: string, sort: string, i: number): void => {
     const newSortOrder = sortSetting(colId, sort, i);
     tableRows.value = tableRows.value.sort(function (a: any, b: any) {
-      let x = a[colId];
-      let y = b[colId];
+      let x = a[`${colId}Unix`] ? a[`${colId}Unix`] : a[colId];
+      let y = b[`${colId}Unix`] ? b[`${colId}Unix`] : b[colId];
       if (x > y) {
         return newSortOrder === "DESC" ? -1 : 1;
       }

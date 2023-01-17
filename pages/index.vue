@@ -10,9 +10,13 @@
         type="text"
         placeholder="..."
         v-model="filterNameInput"
-        @input="filterByName(), test()"
+        @input="filterByString"
         class="col-9"
       />
+    </div>
+
+    <div class="my-3" v-if="tableRows && tableRows.length">
+      Showing {{ tableRows.length }} results
     </div>
 
     <table v-if="tableRows && tableRows.length">
@@ -51,10 +55,26 @@ import { ref } from "@vue/reactivity";
 
 const headerColumns = [
   { title: "Company Name", id: "companyName", sort: "ASC" },
-  { title: "Last report date", id: "lastReportingDate" },
-  { title: "Last report period", id: "lastReportingPeriod" },
-  { title: "Next report date", id: "nextReportingDate" },
-  { title: "Reporting inferred?", id: "nextReportingInferred" },
+  {
+    title: "Last report date",
+    id: "lastReportingDate",
+    sortBy: "lastReportingDateUnix",
+  },
+  {
+    title: "Last report period",
+    id: "lastReportingPeriod",
+    sortBy: "lastReportingPeriodUnix",
+  },
+  {
+    title: "Next report date",
+    id: "nextReportingDate",
+    sortBy: "nextReportingDateUnix",
+  },
+  {
+    title: "Reporting inferred?",
+    id: "nextReportingInferred",
+    sortBy: "nextReportingInferredUnix",
+  },
 ];
 const reportsStore = useReportsStore();
 const filterNameInput = ref("");
@@ -62,7 +82,7 @@ const filterNameInput = ref("");
 reportsStore.setReports(filterNameInput.value);
 const { reportsList } = storeToRefs(reportsStore);
 let reportsListWhole = reportsList;
-const test = () => {
+const filterByString = () => {
   reportsStore.setReports(filterNameInput.value);
 };
 const { sortTableBy, tableRows, tableHeaderColumns } = useTable(

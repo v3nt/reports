@@ -30,13 +30,15 @@ export const useReportsStore = defineStore("reports", {
           ...e,
           lastReportingDateUnix: convertDates(e.lastReportingDate),
           lastReportingPeriodUnix: convertDates(e.lastReportingPeriod),
-          nextReportingDateUnix: e.nextReportingDate,
+          nextReportingDateUnix: convertDates(e.nextReportingDate),
         };
       });
       this.reportsList = filterNameInput
         ? dataWithUnixTs
             .filter((e: ReportsDataItem) =>
-              e.companyName.includes(filterNameInput.toLowerCase())
+              e.companyName
+                .toLowerCase()
+                .includes(filterNameInput.toLowerCase())
             )
             .map((e: ReportsDataItem) => {
               return { ...e };
